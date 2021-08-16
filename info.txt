@@ -20,3 +20,14 @@ Plugins como Fuente de Datos: Estos plugins utilizan Node.js y GraphQL para cons
 Gatsby nos facilita mucho la creación de páginas de nuestra aplicación. Solo debemos crear un archivo en la carpeta src/pages con el nombre de la página y automáticamente tendremos esa ruta disponible con el contenido del archivo.
 Para navegar entre rutas usamos el componente Link
 import { Link } from 'gatsby';
+
+
+---- Wrap Global ----
+Gatsby nos permite configurar componentes que envuelvan todas nuestras páginas al momento de hacer render en el navegador. Para esto debemos configurar la opción exports.wrapRootElement del archivo gatsby-browser.js:
+
+// gatsby-browser.js
+exports.wrapRootElement = ({ element }) => (
+  <Layout>
+    {element}
+  </Layout>
+);
