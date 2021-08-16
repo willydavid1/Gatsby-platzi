@@ -14,3 +14,9 @@ Los plugins pueden ayudarnos de 3 formas:
 Plugins como Componentes: Cuando instalamos el plugin obtenemos un componente que debemos integrar a nuestra aplicación para obtener algún beneficio.
 Plugins como Funcionalidades: Nos ayudan a transformar información o implementar una funcionalidad en concreto. Por ejemplo: gatsby-image o gatsby-plugin-image nos ayuda a crear nuevas versiones de nuestras imágenes con menor calidad para mejorar la carga inicial de nuestro sitio web.
 Plugins como Fuente de Datos: Estos plugins utilizan Node.js y GraphQL para consumir la información de algún lugar o herramienta como Firebase, WordPress, APIs Rest, entre otras.
+
+---- Link ----
+
+Gatsby nos facilita mucho la creación de páginas de nuestra aplicación. Solo debemos crear un archivo en la carpeta src/pages con el nombre de la página y automáticamente tendremos esa ruta disponible con el contenido del archivo.
+Para navegar entre rutas usamos el componente Link
+import { Link } from 'gatsby';
