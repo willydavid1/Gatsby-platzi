@@ -4,3 +4,13 @@ gatsby-config.js: configuramos la metadata (título, descripción y autor) y los
 gatsby-browser.js: una parte de nuestro código se construye desde el servidor, en el build time, y otra parte muy importante en el navegador, cada vez que los usuarios entran a nuestra aplicación. En este archivo podemos utilizar algunas APIs o métodos predefinidos para configurar el código que debe ejecutarse en el navegador, por ejemplo, para añadir vistas, cargar librerías o configurar un store global para manejar el estado.
 gatsby-node.js: configuramos todo lo que tiene que ver con la construcción de nuestro sitio web con Gatsby. Podemos generar vistas en función de nuestra información proveniente de GraphQL, incluso utilizando APIs externas a nuestra aplicación.
 gatsby-ssr.js: configuramos lo que sucede en el build time para que nuestra aplicación funcione correctamente en producción. Tiene el mismo fin que gatsby-browser.js, solo que este será el código que enviamos a producción.
+
+
+---- Plugins ----
+Los plugins son código de Gatsby que alguien más de la comunidad escribió por nosotros para que podamos configurar nuestra aplicación lo más ágil y rápido posible.
+
+Los plugins pueden ayudarnos de 3 formas:
+
+Plugins como Componentes: Cuando instalamos el plugin obtenemos un componente que debemos integrar a nuestra aplicación para obtener algún beneficio.
+Plugins como Funcionalidades: Nos ayudan a transformar información o implementar una funcionalidad en concreto. Por ejemplo: gatsby-image o gatsby-plugin-image nos ayuda a crear nuevas versiones de nuestras imágenes con menor calidad para mejorar la carga inicial de nuestro sitio web.
+Plugins como Fuente de Datos: Estos plugins utilizan Node.js y GraphQL para consumir la información de algún lugar o herramienta como Firebase, WordPress, APIs Rest, entre otras.
