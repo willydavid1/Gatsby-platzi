@@ -31,3 +31,7 @@ exports.wrapRootElement = ({ element }) => (
     {element}
   </Layout>
 );
+
+---- GraphQL ----
+
+Gatsby recolecta toda la información de nuestra aplicación mientras desarrollamos en local y la almacena en un servidor de GraphQL. Luego, en la etapa de compilación, justo antes de pasar a producción, Gatsby guardará los datos de GraphQL junto al código, de esta forma los tendremos disponibles sin necesidad de hacer peticiones a las fuentes de datos originales.
