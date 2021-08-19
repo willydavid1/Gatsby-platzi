@@ -44,3 +44,24 @@ Al iniciar nuestro servidor de desarrollo con Gatsby también iniciamos un servi
 
 Podemos visualizar todos estos datos y su documentación entrando a: localhost:8000/__graphql
 
+
+---- Queries, Edges (conexiones) y Nodos en Gatsby ----
+
+Al trabajar con plugins de fuente de datos debemos entender dos conceptos:
+
+Edges: No podemos consumir la información de estos plugins de la misma forma que otras consultas de GraphQL. En estos casos, la propiedad edges nos hace referencia a la conexión entre estos plugins y el servidor de GraphQL.
+Nodos: Son los elementos individuales de información que obtenemos al hacer una consulta con la propiedad edges.
+Por ejemplo: Para conseguir la información del nuestras imágenes (guardadas en la carpeta src/images) usamos el plugin gatsby-source-filesystem.
+
+En este caso podemos acceder a la información de nuestras imágenes con la siguiente consulta de GraphQL:
+query {
+  allFile {
+    edges {
+      node {
+         # aqui podemos traer la data de cada nodo
+         name
+         relativePath
+      }
+    }
+  }
+}
