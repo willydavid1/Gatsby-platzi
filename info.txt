@@ -65,3 +65,31 @@ query {
     }
   }
 }
+
+
+---- Consultas en GraphQL desde React ----
+
+En la clase anterior aprendimos cómo consultar la información que nos proveen los plugins de fuente de datos desde GraphQL. Ahora, vamos a hacerlo desde nuestras vistas en React.
+
+Debemos importar graphql desde gatsby:
+
+// src/pages/NuestroPage.js
+import { graphql } from 'gatsby';
+Exportar nuestra consulta con el nombre de query:
+
+// src/pages/NuestroPage.js
+export const query = graphql`
+  query NUESTRA_CONSULTA {
+    # ...
+  }
+`;
+Y consumir la información de la propiedad data que obtenemos automáticamente en el componente de nuestra página:
+
+// src/pages/NuestroPage.js
+export default function NuestroPage({ data }) {
+  console.log(data.allSite.edges[0].node.siteMetadata);
+
+  return /* ... */;
+}
+Recuerda que solo podemos hacer estas consultas en los componentes página de nuestra aplicación, es decir, solo desde los archivos dentro de src/pages/.
+
