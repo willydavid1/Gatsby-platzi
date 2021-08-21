@@ -139,3 +139,20 @@ const typography = new Typography({
 // Export helper functions
 export const { scale, rhythm, options } = typography
 export default typography
+
+
+---- Imágenes como fuente de datos ----
+
+{
+  allFile {
+    edges {
+      node {
+        id
+        relativePath
+        size
+        # publicURL url de la img en prod
+        publicURL
+      }
+    }
+  }
+}
