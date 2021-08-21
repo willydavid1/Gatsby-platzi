@@ -93,3 +93,49 @@ export default function NuestroPage({ data }) {
 }
 Recuerda que solo podemos hacer estas consultas en los componentes página de nuestra aplicación, es decir, solo desde los archivos dentro de src/pages/.
 
+
+---- Typography ----
+
+Vamos a usar el plugin gatsby-plugin-typography para manejar las fuentes de nuestro proyecto. Recuerda que este plugin nos ayuda a integrar la librería Typography.js, por lo que debemos instalar el plugin y la librería base.
+
+Dato curioso: Esta librería fue creada por Kyle Mathews, uno de los creadores y desarrolladores de Gatsby.
+
+Instalación:
+
+npm install gatsby-plugin-typography react-typography typography
+Configuración:
+
+// gatsby-config.js
+module.exports = {
+  siteMetadata: { /* ... */ },
+  plugins: [
+    /* ... */
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    }
+    /* ... */
+  ],
+};
+// src/utils/typography.js
+import Typography from "typography"
+
+const typography = new Typography({
+  baseFontSize: "18px",
+  baseLineHeight: 1.666,
+  headerFontFamily: [
+    "Avenir Next",
+    "Helvetica Neue",
+    "Segoe UI",
+    "Helvetica",
+    "Arial",
+    "sans-serif",
+  ],
+  bodyFontFamily: ["Georgia", "serif"],
+})
+
+// Export helper functions
+export const { scale, rhythm, options } = typography
+export default typography
