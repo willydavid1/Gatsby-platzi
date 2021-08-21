@@ -17,9 +17,9 @@ export const above = Object.keys(size).reduce((acc, label) => {
 }, {})
 
 export const GlobalStyles = createGlobalStyle`
-  .___gatsby{
+  /* .___gatsby{
     position: absolute;
-  }
+  } */
   main{
     padding-top: 3.5rem;
   }

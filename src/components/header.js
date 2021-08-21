@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { MenuItem, StyledHeader } from "../styles/components"
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <StyledHeader>
     <Link to="/">
       <img src="https://i.postimg.cc/6q3pg48v/Logo.png" alt="logo" />
@@ -18,25 +18,12 @@ const Header = ({ siteTitle }) => (
         </MenuItem>
         <MenuItem>
           <Link to="/cart">Cart</Link>
-          <span>
+          <span style={{ marginLeft: "1rem", cursor: "pointer" }}>
             <img src="https://i.postimg.cc/L6wpMxLt/cart.png" alt="CartLogo" />
           </span>
         </MenuItem>
       </ul>
     </nav>
-    <div>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
   </StyledHeader>
 )
 
