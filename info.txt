@@ -156,3 +156,57 @@ export default typography
     }
   }
 }
+
+
+---- Agregando productos a nuestra tienda en línea ----
+
+Para usar Stripe desde nuestra aplicación con gatsby necesitamos instalar los siguientes plugins:
+
+npm i gatsby-source-stripe gatsby-plugin-stripe
+Además, la librería dotenv nos permitirá acceder a nuestras variables de entorno para usar a las llaves privadas de Stripe:
+
+npm i dotenv
+Luego de esto debemos añadir los plugins al archivo gatsby-config.js:
+
+// gatsby-config.js
+require('dotnev').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+module.exports = {
+  siteMetadata: { /* ... */ },
+  plugins: [
+    /* ... */
+    `gatsby-plugin-stripe`,
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: [`Price`],
+        secretKey: process.env.STRIPE_SK,
+      },
+    }
+    /* ... */
+  ],
+};
+De esta forma tendremos disponibles los productos de Stripe desde el servidor de GraphQL en Gatsby:
+
+# localhost:8000/__graphql
+
+{
+  allStripePrice {
+    edges {
+      node {
+        id
+        unit_amount
+        product {
+          name
+          metadata {
+            img
+            description
+            wear
+          }
+        }
+      }
+    }
+  }
+}
