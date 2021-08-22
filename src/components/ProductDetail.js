@@ -9,7 +9,7 @@ import {
   StyledProductDetail,
   Tag,
 } from "../styles/components"
-import SEO from "./seo"
+import { SEO, Stars } from "../components"
 
 const ProductDetail = ({ unit_amount, id, product: { name, metadata } }) => {
   const [size, setSize] = useState(2)
@@ -29,6 +29,9 @@ const ProductDetail = ({ unit_amount, id, product: { name, metadata } }) => {
         <Tag>Popular</Tag>
         <h2>{name}</h2>
         <b>USD {formattedPrice}</b>
+        <Stars />
+        <small>{metadata.description}</small>
+
         {metadata?.wear && (
           <SizeSelect selected={size}>
             <SizeButton onClick={() => handleChangeSize(1)}>XS</SizeButton>
@@ -39,10 +42,11 @@ const ProductDetail = ({ unit_amount, id, product: { name, metadata } }) => {
         )}
         <p>Cantidad:</p>
         <QtySelect>
-          <button onClick={() => qty && setQty(qty - 1)}>-</button>
+          <QtyButton onClick={() => qty && setQty(qty - 1)}>-</QtyButton>
           <input type="text" disabled value={qty} name="" id="" />
-          <button onClick={() => setQty(qty + 1)}>+</button>
+          <QtyButton onClick={() => setQty(qty + 1)}>+</QtyButton>
         </QtySelect>
+        <Button>Agregar al carrito</Button>
       </div>
     </StyledProductDetail>
   )
