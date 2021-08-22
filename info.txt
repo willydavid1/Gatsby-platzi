@@ -210,3 +210,49 @@ De esta forma tendremos disponibles los productos de Stripe desde el servidor de
     }
   }
 }
+
+
+---- Creando páginas en función de los datos - gatsby-node.js ----
+
+El método createPages de gatsby-node.js nos ayuda a crear páginas sin necesidad de crear un archivo por cada una de ellas en la carpeta src/pages.
+
+En este caso, vamos a generar una página por cada uno de los productos que guardamos en Stripe:
+
+// gatsby-node.js
+const path = require("path")
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+  const productTemplate = path.resolve(`src/templates/Product.js`)
+  const result = await graphql(`
+    query GET_PRICES {
+      allStripePrice {
+        edges {
+          node {
+            id
+            unit_amount
+            product {
+              name
+              metadata {
+                description
+                img
+                wear
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  if (result.errors) {
+    console.log("result.errors", result.errors)
+    throw result.errors
+  }
+
+  result.data.allStripePrice.edges.forEach(({ node }) => {
+    createPage({
+      path: `${node.id}`,
+      component: productTemplate,
+    })
+  })
+}
