@@ -265,3 +265,43 @@ createPage({
   component: productTemplate,
   context: node, // pass the node information to the page
 })
+
+
+---- Carrito de Compras: useContext ----
+
+React Context nos ayuda a crear un estado global, una forma de compartir el estado de nuestra aplicación entre todos los componentes, sin importar en qué lugar se encuentren y sin necesidad de pasar y pasar props.
+
+Además, useContext nos permite usar todas las características de React.Context con la sintaxis de los hooks. En este caso, vamos a usar todas estas herramientas para construir nuestro carrito de compras.
+
+Crear el contexto:
+// context.js
+import React, { createContext, useState } from 'react';
+
+export const CartContext = createContext();
+
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = element => {
+    setCart([ ...cart, element ]);
+  }
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+
+}
+
+Encerrar toda nuestra aplicación (o las partes donde queremos compartir el estado) en el componente <Provider>:
+// gatsby-browser.js
+
+exports.wrapRootElement = ({ element }) => (
+  <CartProvider>
+    <GlobalStyles />
+    <GlobalStyles>{element}</GlobalStyles>
+  </CartProvider>
+);
+Consumir el Contexto desde cualquier componente:
+const { cart } = useContext(CartContext);
