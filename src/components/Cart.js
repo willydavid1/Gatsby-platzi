@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { Button, StyledCart } from "../styles/components"
 import { CartContext } from "../context"
@@ -6,11 +6,34 @@ import priceFormat from "../utils/priceFormat"
 
 const Cart = () => {
   const { cart } = useContext(CartContext)
+  const [stripe, setStripe] = useState(null)
 
   const total = cart.reduce(
     (prev, current) => prev + current.price * current.quantity,
     0
   )
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+    let item = cart.map(({ id, quantity }) => ({
+      price: id,
+      quantity: quantity,
+    }))
+
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: item,
+      mode: "payment",
+      successUrl: `${process.env.DOMAIN}${process.env.SUCCESS_REDIRECT}`,
+      cancelUrl: `${process.env.DOMAIN}${process.env.CANCEL_REDIRECT}`,
+    })
+    if (error) {
+      throw error
+    }
+  }
+
+  useEffect(() => {
+    setStripe(window.Stripe(process.env.STRIPE_PK))
+  }, [])
 
   return (
     <StyledCart>
@@ -45,7 +68,9 @@ const Cart = () => {
           <Link to="/">
             <Button type="outline">Volver</Button>
           </Link>
-          <Button>Comprar</Button>
+          <Button onClick={handleSubmit} disabled={!cart.length}>
+            Comprar
+          </Button>
         </div>
       </nav>
     </StyledCart>
