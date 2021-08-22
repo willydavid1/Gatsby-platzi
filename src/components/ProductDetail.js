@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import priceFormat from "../utils/priceFormat"
+import { CartContext } from "../context"
 import {
   Button,
   QtyButton,
@@ -15,10 +16,16 @@ const ProductDetail = ({ unit_amount, id, product: { name, metadata } }) => {
   const [size, setSize] = useState(2)
   const [qty, setQty] = useState(1)
 
+  const { addToCart } = useContext(CartContext)
+
   const formattedPrice = priceFormat(unit_amount)
 
   const handleChangeSize = (newSize = 2) => {
     setSize(newSize)
+  }
+
+  const handleSubmit = () => {
+    addToCart({ price: unit_amount, id, name, metadata, quantity: qty })
   }
 
   return (
@@ -46,7 +53,7 @@ const ProductDetail = ({ unit_amount, id, product: { name, metadata } }) => {
           <input type="text" disabled value={qty} name="" id="" />
           <QtyButton onClick={() => setQty(qty + 1)}>+</QtyButton>
         </QtySelect>
-        <Button>Agregar al carrito</Button>
+        <Button onClick={handleSubmit}>Agregar al carrito</Button>
       </div>
     </StyledProductDetail>
   )
