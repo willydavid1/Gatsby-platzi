@@ -256,3 +256,12 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
+
+---- Manejo de Gatsby Templates ----
+
+createPage({
+  path: `${node.id}`,
+  component: productTemplate,
+  context: node, // pass the node information to the page
+})

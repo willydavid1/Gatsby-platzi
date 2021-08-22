@@ -1,7 +1,6 @@
 import React from "react"
+import { ProductDetail } from "../components"
 
-const Product = () => {
-  return <div>Product</div>
-}
+const Product = ({ pageContext }) => <ProductDetail {...pageContext} />
 
 export default Product
